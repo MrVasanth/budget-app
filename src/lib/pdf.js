@@ -1,9 +1,9 @@
 // Opens a statement PDF on the phone (unlocking it with its password) and pulls out the text.
 // The PDF file itself is never uploaded anywhere.
 import * as pdfjs from 'pdfjs-dist/legacy/build/pdf.mjs';
-import workerUrl from 'pdfjs-dist/legacy/build/pdf.worker.min.mjs?url';
 
-pdfjs.GlobalWorkerOptions.workerSrc = workerUrl;
+// Copied next to the app at build time (see vite.config.js).
+pdfjs.GlobalWorkerOptions.workerSrc = new URL('./pdfjs/pdf.worker.min.js', document.baseURI).href;
 
 export class NeedsPassword extends Error {
   constructor(wrong) {

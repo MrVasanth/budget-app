@@ -17,6 +17,8 @@ function serviceWorker() {
       for (const dir of ['cmaps', 'standard_fonts']) {
         fs.cpSync(path.resolve('node_modules/pdfjs-dist', dir), path.join(options.dir, 'pdfjs', dir), { recursive: true });
       }
+      // The PDF reader's worker, saved as .js so every host serves it as JavaScript.
+      fs.copyFileSync(path.resolve('node_modules/pdfjs-dist/legacy/build/pdf.worker.min.mjs'), path.join(options.dir, 'pdfjs', 'pdf.worker.min.js'));
     },
   };
 }
